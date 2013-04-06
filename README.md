@@ -15,4 +15,4 @@ This work is licensed under a [BSD 3-Clause License][License].
 
 [CC]: http://www.computercraft.info/
 [Silcom]: https://github.com/CodeLiners/Silcom
-[License]: https://github.com/CodeLiners/Silcom-Kernel/LICENSE.md
+[License]: LICENSE.md
