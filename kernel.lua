@@ -1,4 +1,4 @@
-KERNEL_VERSION = "3.1"
+KERNEL_VERSION = "1.0"
 KERNEL_DIR = {...}[1] or "boot"
 
 
