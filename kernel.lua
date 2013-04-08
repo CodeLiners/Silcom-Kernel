@@ -1,5 +1,5 @@
 KERNEL_VERSION = "1.0"
-KERNEL_DIR = {...}[1] or "boot"
+KERNEL_DIR = {...}[1] or "/boot"
 
 
 local function loadCore()
