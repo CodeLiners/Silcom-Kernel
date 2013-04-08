@@ -42,10 +42,6 @@ function run()
     print("Silcom Kernel "..KERNEL_VERSION.." booting...")
 
     loadCore()
-    doModCallBack("load", {"Attempting to load Modules.", "load", "loaded"})
-    doModCallBack("init", {"Starting Initialization.", "initialize", "initialize"})
-    doModCallBack("postInit", {"Starting Post-Initialization.", "post-initialize", "post-initialized"})
-    doModCallBack("enable", {"Attempting to enable Modules.", "enable", "enabled"})
 
     local initproc
     local function createAndRunThread(func, env)
@@ -59,7 +55,10 @@ function run()
     end
     rawset(_G, "kernel_createAndRunThread", createAndRunThread)
 
-
+    doModCallBack("load", {"Attempting to load Modules.", "load", "loaded"})
+    doModCallBack("init", {"Starting Initialization.", "initialize", "initialize"})
+    doModCallBack("postInit", {"Starting Post-Initialization.", "post-initialize", "post-initialized"})
+    doModCallBack("enable", {"Attempting to enable Modules.", "enable", "enabled"})
 
     print("Starting task scheduler...")
     thread_startEngine()
