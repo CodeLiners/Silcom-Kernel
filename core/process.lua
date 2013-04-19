@@ -17,7 +17,7 @@ function process_create(func, uid, mode, forcepid, parent, args, myterm, envvars
     end
     args = utils_checkType(args, {"table", "nil"}, 6, nil, "native/process_create") or {}
     --print(3)
-    local id = forcepid or math.random(1, 99999999)
+    local id = forcepid or utils_getUniqueKey(processes)
     --print(5)
     local env
 
