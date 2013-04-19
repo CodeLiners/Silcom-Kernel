@@ -25,6 +25,28 @@ function utils_getkey(haystack, needle)
     end
 end
 
+function utils_getRealTableSize(t) {
+    local size = 0
+    for k, v in ipairs(table) do
+        if v then
+            size = size +1
+        end
+    end
+    return size
+}
+
+function utils_getUniqueKey(t) {
+    if utils_getRealTableSize(t) >= 99999999 then
+		error("No unique keys left")
+	end
+	while true do
+		local id = math.random(1, 99999999)
+		if not t[id] then
+			return id
+		end
+	end
+}
+
 function utils_checkType(obj, t, paramnr, stacklvl, name)
     if type(t) == "string" then
         if type(obj) == t then
