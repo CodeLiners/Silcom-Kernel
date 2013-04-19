@@ -12,7 +12,7 @@ function thread_create(func, pid, name, env)
         error("Invalid process: "..pid)
     end
     
-    local id = math.random(1, 99999999)
+    local id = utils_getUniqueKey(threads)
 
     setfenv(func, env or process_get(pid).env)
     threads[id] = {
