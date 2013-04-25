@@ -23,6 +23,6 @@ on("load",
             -- todo: fancy stuff
             error(err, 2 + (level or 1))
         end)
-        registerHook("yield", coroutine.yield)
+        registerUHook("yield", coroutine.yield)
     end
 )
