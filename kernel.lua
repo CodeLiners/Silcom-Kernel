@@ -7,7 +7,7 @@ local function loadCore()
         "utils",
         "event",
         "threading",
-        "prcoess",,
+        "process",
         "streams",
         "mod"
     }
