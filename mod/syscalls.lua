@@ -1,7 +1,12 @@
 on("enable", 
     function()
         usermode_set("syscall", function(hook, ...)
-            return mod_getHook(hook)(...)
+            hook = mod_getHook(hook)
+            if hook.meta.syscall then
+                return hook.meta.func(...)
+            else
+                error("Unknown syscall")
+            end
         end)
     end
 )

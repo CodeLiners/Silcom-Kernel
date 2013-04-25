@@ -7,7 +7,8 @@ local function loadCore()
         "utils",
         "event",
         "threading",
-        "prcoess",
+        "prcoess",,
+        "streams",
         "mod"
     }
     for k, v in ipairs(coremods) do
@@ -23,7 +24,7 @@ local function doModCallBack(callback, lang)
     if callback == "load" then
         modList = fs.list(KERNEL_DIR.."/mod")
         for k, v in pairs(modList) do
-            v = v:gsub("\.lua$","")
+            v = v:gsub("%.lua$","")
         end
     end
     for k, v in ipairs(modlist) do
@@ -38,6 +39,7 @@ local function doModCallBack(callback, lang)
 end
 
 
+-- TODO: move to init process
 function run()
     print("Silcom Kernel "..KERNEL_VERSION.." booting...")
 

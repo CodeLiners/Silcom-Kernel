@@ -1,16 +1,16 @@
 local function getPID()
-    return thread_get(thread_getRunning()).pid
+    return process_getRunning() -- replace stuff
 end
 
 on("load",
     function()
-        registerHook("term", function(func, ...)
+        registerUHook("term", function(func, ...)
             local f = process_get(getPID()).term[func]
             if not f then error("Invalid term function: "..func.."("..table.concat({...}, ", ")..")") end
             return f(...)
         end)
 
-        registerHook("term_listfunc", function()
+        registerUHook("term_listfunc", function()
             local ret = {}
             for k, v in pairs(process_get(getPID()).term) do
                 table.insert(ret, k)
@@ -18,7 +18,7 @@ on("load",
             return ret
         end)
 
-        registerHook("term_event", function(term, type, ...)
+        registerUHook("term_event", function(term, type, ...)
             term_termEvent(term, type, ...)
         end)
     end

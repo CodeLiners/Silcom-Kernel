@@ -10,6 +10,10 @@ function process_exists(pid)
     return (processes[pid] and true or false)
 end
 
+function process_getRunning()
+    return thread_get(thread_getRunning()).pid
+end
+
 function process_create(func, uid, mode, forcepid, parent, args, myterm, envvars, name, params)
     params = params or {}
     if not (mode and ({kernel = true, user = true})[mode]) then

@@ -1,6 +1,6 @@
 local modList = {}
 local myG = {_G = _G}
-local hookList = {user = {}, kernel = {}}
+local hookList = {}
 setmetatable(myG._G, {__index = _G, __pairs = _G, __newindex = rawset})
 
 local callbacks = {
@@ -50,23 +50,32 @@ local callbacks = {
             mod_event(module, event, ...)
         end
 
-        local function registerHook(hook, func, isKernelOnly)
-            local hookType = isKernelOnly and "kernel" or "user"
-            if not hookList[hookType][hook] then
-                modList[module].hooks[hookType][hook] = func
+        local function registerHook(hook, func, meta)
+            if not hookList[hook] then
+                modList[module].hooks[hook] = {func = func, meta = meta or {}, module = module}
+                hookList[hook] = modList[module].hooks[hook]
             else
-                return hook.." was already registered by module '"..hookList[hookType][hook].."'"
+                return hook.." was already registered by module '"..hookList[hook].module.."'"
             end
         end
 
-        function modEnv.registerHook(hooks, func)
+        function modEnv.registerHook(hooks, p2, p3)
+            local func, meta
             utils_checkType(hooks, {"table", "string"}, 1, 3)
-            utils_checkType(func, {"nil", "function"}, 2, 3)            
+            utils_checkType(p2, {"nil", "table", "function"}, 2, 3)
+            utils_checkType(p3, {"nil", "function"}, 3, 3)
+            if type(p2) == "table" then
+                meta = p2
+                func = p3
+            else
+                meta = {}
+                func = p2
+            end
             local response
             if type(hooks) == "table" then
                 local responseTable = {}
                 for h, f in pairs(hooks) do
-                    table.insert(responseTable, registerHook(h, f))
+                    table.insert(responseTable, registerHook(h, f, meta))
                 end
                 if responseTable[1] then
                     response = ""
@@ -76,11 +85,15 @@ local callbacks = {
                 end
             else
                 utils_checkType(func, {"function"}, 2, 3)
-                return registerHook(hooks, func)
+                return registerHook(hooks, func, meta)
             end
         end
 
-        function modEnv.registerKernelHook(hooks, func)
+        function modEnv.registerUHook(hooks, func)
+            retrun modEnv.registerHook(hooks, {syscall = true}, func)
+        end
+
+        --[[function modEnv.registerKernelHook(hooks, func)
             utils_checkType(hooks, {"table", "string"}, 1, 3)
             utils_checkType(func, {"nil", "function"}, 2, 3)            
             local response
@@ -100,9 +113,9 @@ local callbacks = {
                 utils_checkType(func, {"function"}, 2, 3)
                 return registerHook(hooks, func, true)
             end
-        end
+        end]]
 
-        modList[module] = {handlers = {}, enabled = false, hooks = {kernel = {}, user = {}}}
+        modList[module] = {handlers = {}, enabled = false, hooks = {}}
         setfenv(mod, modEnv)
         ok, err = pcall(mod, ...)
         if  ok then 
@@ -167,19 +180,7 @@ function mod_getList()
 end
 
 function mod_getHook(hook)
-    for hookname, module in pairs(hookList.user) do
-        if hookname == hook and modList[module].enabled then
-            return modList[module].hooks.user[hook]
-        end
-    end
-end
-
-function mod_getKernelHook(hook)
-    for hookname, module in pairs(hookList.kernel) do
-        if hookname == hook and modList[module].enabled then
-            return modList[module].hooks.kernel[hook]
-        end
-    end
+    return hookList[hook]
 end
 
 function mod_handleEvent(module, event, ...)
@@ -191,7 +192,7 @@ function mod_handleEvent(module, event, ...)
 end
 
 function mod_registerCallBack(name, func)
-    if not callbacks[naem] then
+    if not callbacks[name] then
         callbacks[name] = func
         return true
     end

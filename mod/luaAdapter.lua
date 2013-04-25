@@ -1,19 +1,26 @@
 on("load", 
     function()
         for k, v in pairs(string) do
-            registerHook("string_"..k, v)
+            registerUHook("string_"..k, v)
         end
         for k, v in pairs(table) do
-            registerHook("table_"..k, v)
+            registerUHook("table_"..k, v)
         end
-        registerHook("lua_print", print)
-        registerHook("lua_unpack", unpack)
-        registerHook("lua_pairs", pairs)
-        registerHook("lua_next", next)
-        registerHook("lua_tostring", tostring)
-        registerHook("lua_tonumber", tonumber)
-        registerHook("lua_type", type)
-        registerHook("lua_error", function(err, level)
+        registerUHook("lua_print", print) -- debug code, TODO: remove
+        registerUHook("lua_unpack", unpack)
+        registerUHook("lua_pairs", pairs)
+        registerUHook("lua_next", next)
+        registerUHook("lua_tostring", tostring)
+        registerUHook("lua_tonumber", tonumber)
+        registerUHook("lua_type", function(obj)
+            if {userdata = 1, table = true}[type(obj)] then
+                local mt = getmetatable(obj)
+                if mt and mt.__type then return mt.__type end
+            end
+            return type(obj)
+        end)
+        registerUHook("lua_error", function(err, level)
+            -- todo: fancy stuff
             error(err, 2 + (level or 1))
         end)
         registerHook("yield", coroutine.yield)
