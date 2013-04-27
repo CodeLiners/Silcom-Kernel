@@ -85,5 +85,11 @@ function endsWith(haystack, needle)
     return (haystack:sub(0 - needle:len()) == needle)
 end
 
+local function str_split( str, char )
+    if #char != 1 then error("char has to be 1 char long") end
+    return {str:match((str:gsub("[^"..sep.."]*"..sep, "([^"..sep.."]*)"..sep)))}
+end
+
 rawset(string, "startsWith", startsWith)
 rawset(string, "endsWith", endsWith)
+rawset(string, "split", str_split)
