@@ -6,6 +6,9 @@ on("load",
         for k, v in pairs(table) do
             registerUHook("table_"..k, v)
         end
+        for k, v in pairs(coroutine) do
+            registerUHook("coroutine_"..k, v)
+        end
         registerUHook("lua_print", print) -- debug code, TODO: remove
         registerUHook("lua_unpack", unpack)
         registerUHook("lua_pairs", pairs)
@@ -23,6 +26,5 @@ on("load",
             -- todo: fancy stuff
             error(err, 2 + (level or 1))
         end)
-        registerUHook("yield", coroutine.yield)
     end
 )

@@ -1,9 +1,29 @@
 KERNEL_VERSION = "1.0"
-KERNEL_DIR = {...}[1] or "/boot"
+KERNEL_DIR = KERNEL_DIR or "/boot"
 
+local constants = {
+    LF = string.char(10),
+    CR = string.char(11),
+}
+local ascii = {
+    LF = 10,
+    CR = 11,
+    ESC = 27
+}
+
+for k, v in pairs(constants) do
+    rawset(_G, k, v)
+end     
+
+for k, v in pairs(ascii) do
+    v_ = string.char(v)
+    rawset(_G, k, v_)
+    ascii[k] = v_
+end 
 
 local function loadCore()
     local coremods = {
+        "vfs.lua",
         "utils",
         "event",
         "threading",
