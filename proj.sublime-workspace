@@ -4,15 +4,35 @@
 		"selected_items":
 		[
 			[
-				"p",
-				"pairs"
+				"u",
+				"user_getName"
 			],
 			[
-				"str",
-				"stringutils"
+				"re",
+				"registerUHook"
+			],
+			[
+				"p",
+				"password"
+			],
+			[
+				"us",
+				"user_info"
+			],
+			[
+				"f",
+				"fields"
 			],
 			[
 				"st",
+				"str_split"
+			],
+			[
+				"pa",
+				"passwd"
+			],
+			[
+				"str",
 				"stringutils"
 			],
 			[
@@ -60,10 +80,6 @@
 				"endif"
 			],
 			[
-				"re",
-				"return"
-			],
-			[
 				"in",
 				"init_troll"
 			],
@@ -104,10 +120,6 @@
 				"replace"
 			],
 			[
-				"u",
-				"user"
-			],
-			[
 				"cl",
 				"clients"
 			],
@@ -126,10 +138,6 @@
 			[
 				"c",
 				"close"
-			],
-			[
-				"pa",
-				"passthough"
 			],
 			[
 				"arg",
@@ -155,22 +163,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "mod/syscalls.lua",
-			"settings":
-			{
-				"buffer_size": 373,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "mod/user.lua",
-			"settings":
-			{
-				"buffer_size": 533,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/AAAPackageDev/Support/Property List to JSON.sublime-build",
 	"command_palette":
@@ -178,6 +170,10 @@
 		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"ssl",
+				"Set Syntax: Lua"
+			],
 			[
 				"ssc",
 				"Set Syntax: C++"
@@ -208,19 +204,22 @@
 	},
 	"file_history":
 	[
+		"/home/stephan/.ccdesk/computer/0/mod/prog.lua",
+		"/home/stephan/.ccdesk/computer/0/kernel.lua",
+		"/home/stephan/.ccdesk/computer/0/core/utils.lua",
+		"/home/stephan/.ccdesk/computer/0/startup",
+		"/home/stephan/.ccdesk/computer/0/mod/syscalls.lua",
+		"/home/stephan/.ccdesk/computer/0/mod/user.lua",
 		"/home/stephan/.config/sublime-text-2/Packages/Lua/Lua.tmLanguage",
 		"/home/stephan/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
-		"/home/stephan/.ccdesk/computer/0/kernel.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/luaAdapter.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/term.lua",
-		"/home/stephan/.ccdesk/computer/0/mod/syscalls.lua",
 		"/home/stephan/.ccdesk/computer/0/core/mod.lua",
 		"/home/stephan/.ccdesk/computer/0/core/event.lua",
 		"/home/stephan/.ccdesk/computer/0/core/process.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/io_old.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/io.lua",
 		"/home/stephan/.ccdesk/computer/0/core/streams.lua",
-		"/home/stephan/.ccdesk/computer/0/core/utils.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/stringutils.lua",
 		"/home/stephan/.ccdesk/computer/0/core/fs.lua",
 		"/home/stephan/.ccdesk/computer/0/mod/bit.lua",
@@ -292,63 +291,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "mod/syscalls.lua",
-					"settings":
-					{
-						"buffer_size": 373,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Lua/Lua.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "mod/user.lua",
-					"settings":
-					{
-						"buffer_size": 533,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Lua/Lua.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

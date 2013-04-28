@@ -1,0 +1,2 @@
+rawset(_G, "KERNEL_DIR", "/")
+rawset(_G, "DEBUG", true)

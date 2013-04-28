@@ -65,7 +65,7 @@ on("load", function ()
     end
     vfs.touch("/etc/shadow")
     registerUHook("user_login", function (user, pass)
-        if process_get(process_getRunning()).uid != 1 then
+        if process_get(process_getRunning()).uid ~= 1 then
             error("Access denied")
         end
         return user_checkLogin(user, pass)
