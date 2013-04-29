@@ -140,6 +140,31 @@ function vfs.touch( name )
     end
 end
 
+function vfs.readLines( path )
+  local f = vfs.open(path, "r")
+  if f then
+        local lines = {}
+        local line = f.readLine()
+        while line do
+			table.insert(lines, line)
+			line = f.readLine()
+        end
+        f.close()
+        return lines
+  end
+  return nil
+end
+
+function vfs.writeLines( path, lines )
+  local f = vfs.open(path, "w")
+  if f then
+        for index, line in ipairs(lines) do
+			f.writeLine(line)
+        end
+        f.close()
+  end
+end
+
 for k, v in ipairs(maindirs) do
     if not vfs.exists(v) then vfs.mkdir(v) end
 end
